@@ -5,7 +5,7 @@ int heading = 1;
 
 color bg = #FFFFFF;
 
-color[] colors = {#222222, #444444, #666666, #888888, #AAAAAA, #CCCCCC, #EEEEEE};
+color[] colors = {#111111, #222222, #333333, #444444, #555555, #666666, #777777, #888888, #999999, #AAAAAA, #BBBBBB, #CCCCCC, #DDDDDD, #EEEEEE};
 
 void setup()
 {
@@ -24,30 +24,32 @@ void draw()
 
   heading = -heading;
   
-  fill(colors[(int)random(0,i)]);   
+  fill(colors[(int)random(0,14)]);   
   
-  switch(random(2))
+  switch((int)random(0,3))
   {
     case 0:
-      println("go left");
-      triangle(x, y, x - side, y, x + side / 2, y + heading * side * sqrt(3)/2);
-      x += side;
-      y += side;
-      
+      println("go left: " + x);
+      if (x > 0)
+      {
+        triangle(x, y, x - side, y, x - side / 2, y + -heading * side * sqrt(3)/2);
+        x -= side / 2;
+        y = y + -heading * side * sqrt(3)/2;
+      }
       break;
     case 1:
-      println("go right");    
-      triangle(x, y, x + side, y, x + side / 2, y + -heading * side * sqrt(3)/2);
-      x += side / 2;
-      y = y + -heading * side * sqrt(3)/2;
-
+      println("go right: " + x);    
+      if (x < width){
+        triangle(x, y, x + side, y, x + side / 2, y + -heading * side * sqrt(3)/2);
+        x += side / 2;
+        y = y + -heading * side * sqrt(3)/2;
+      }
       break;
     case 2:
-      println("go up/down");
-      triangle(x, y, x + side, y, x + side / 2, y + heading * side * sqrt(3)/2);
-      x += side;
-      y += side;
-      
+      println("go up/down: " + y );
+      if (y > 0 && y < height){
+        triangle(x, y, x + side, y, x + side / 2, y + -heading * side * sqrt(3)/2);
+      }
       break;
   }
   
