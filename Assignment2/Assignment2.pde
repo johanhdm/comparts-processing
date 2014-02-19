@@ -30,26 +30,31 @@ void draw()
   {
     case 0:
       println("go left: " + x);
-      if (x > 0)
+      if (x < 0)
       {
+        x = 0;
+      }
+      
         triangle(x, y, x - side, y, x - side / 2, y + -heading * side * sqrt(3)/2);
         x -= side / 2;
         y = y + -heading * side * sqrt(3)/2;
-      }
       break;
     case 1:
       println("go right: " + x);    
-      if (x < width){
-        triangle(x, y, x + side, y, x + side / 2, y + -heading * side * sqrt(3)/2);
-        x += side / 2;
-        y = y + -heading * side * sqrt(3)/2;
+      if (x > width){
+        x = width;
       }
+    
+      triangle(x, y, x + side, y, x + side / 2, y + -heading * side * sqrt(3)/2);
+      x += side / 2;
+      y = y + -heading * side * sqrt(3)/2;
       break;
     case 2:
       println("go up/down: " + y );
-      if (y > 0 && y < height){
-        triangle(x, y, x + side, y, x + side / 2, y + -heading * side * sqrt(3)/2);
-      }
+      if (y < 0) y = 0;
+      if (y > height) y = height;
+      
+      triangle(x, y, x + side, y, x + side / 2, y + -heading * side * sqrt(3)/2);
       break;
   }
   
